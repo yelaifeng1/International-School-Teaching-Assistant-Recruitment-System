@@ -1,3 +1,6 @@
+// ReviewApplicationServlet handles review requests from reviewApplications.jsp.
+// It receives application id and status from the form submission.
+// In the next version, it will update applications.json and save the review result.
 public class ReviewApplicationServlet {
 
     public void reviewApplication(int id, String status) {
