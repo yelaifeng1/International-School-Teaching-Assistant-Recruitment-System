@@ -46,6 +46,7 @@
 <body>
 
 <h1>Application Review System</h1>
+<p>Admin can review applications below</p>
 
 <table>
     <tr>
