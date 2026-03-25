@@ -187,8 +187,10 @@
         </p>
         
         <div class="action-buttons">
-            <button class="btn btn-primary">查看申请</button>
-            <a href="<%= request.getContextPath() %>/logout" style="text-decoration: none;">
+            <a href="<%= request.getContextPath() %>/applicant/applications.jsp" style="text-decoration: none; flex: 1;">
+                <button class="btn btn-primary" style="width: 100%;">查看申请</button>
+            </a>
+            <a href="<%= request.getContextPath() %>/logout" style="text-decoration: none; flex: 1;">
                 <button class="btn btn-logout" style="width: 100%;">退出登录</button>
             </a>
         </div>

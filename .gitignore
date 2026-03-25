@@ -1,5 +1,23 @@
-target/
-*.class
-*.log
-.idea/
-.vscode/*.log
+# ── 默认排除所有文件 ──────────────────────────────────────────
+*
+
+# ── 白名单：允许追踪的路径 ───────────────────────────────────
+# 根目录必要文件
+!.gitignore
+!pom.xml
+!README.md
+
+# src/main 目录本身及其所有内容
+!src/
+!src/main/
+!src/main/**
+
+# ── 在白名单内再排除不需要追踪的路径 ─────────────────────────
+# Claude Code 配置目录
+src/main/java/com/group50/.claude/
+
+# 编译产物
+src/main/**/*.class
+
+# 日志
+src/main/**/*.log
