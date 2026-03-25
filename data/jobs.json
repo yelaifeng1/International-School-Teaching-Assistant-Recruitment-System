@@ -1,0 +1,11 @@
+[
+  {
+    "jobId": "J001",
+    "courseCode": "COMP1001",
+    "courseName": "Introduction to Programming",
+    "lecturerName": "Dr Smith",
+    "requirements": "Java basics",
+    "deadline": "2026-04-01",
+    "status": "Open"
+  }
+]

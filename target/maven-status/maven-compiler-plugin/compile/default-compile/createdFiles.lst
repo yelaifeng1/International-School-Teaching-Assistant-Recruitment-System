@@ -1,0 +1,7 @@
+com\group50\tasystem\model\Application.class
+com\group50\tasystem\model\User.class
+com\group50\tasystem\model\Job.class
+com\group50\tasystem\util\JsonUtil.class
+com\group50\tasystem\controller\LoginServlet.class
+com\group50\tasystem\model\Applicant.class
+com\group50\tasystem\util\IdGenerator.class
