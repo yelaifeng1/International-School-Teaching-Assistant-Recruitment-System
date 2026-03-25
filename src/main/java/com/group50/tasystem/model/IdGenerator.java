@@ -1,4 +1,4 @@
-package com.group50.tasystem.util;
+package com.group50.tasystem.model;
 
 public class IdGenerator {
 
