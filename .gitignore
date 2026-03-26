@@ -1,0 +1,20 @@
+cat > .gitignore << 'EOF'
+# ── 默认屏蔽所有 ──
+*
+
+# ── 白名单 ──
+!.gitignore
+!1.txt
+!*.md
+
+!src/
+!src/**
+
+!data/
+!data/**
+
+# ── 白名单内再排除 ──
+src/**/*.class
+src/**/*.log
+data/**/*.bak
+EOF

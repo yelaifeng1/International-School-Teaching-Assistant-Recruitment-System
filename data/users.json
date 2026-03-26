@@ -33,5 +33,19 @@
     "password": "wodedaodun6",
     "role": "TA",
     "email": "jp2023213456@qmul.ac.uk"
+  },
+  {
+    "userId": "U006",
+    "username": "test",
+    "password": "test12345",
+    "role": "MO",
+    "email": "x@test.com"
+  },
+  {
+    "userId": "U007",
+    "username": "testadmin",
+    "password": "test12345",
+    "role": "ADMIN",
+    "email": "x@test.com"
   }
 ]
