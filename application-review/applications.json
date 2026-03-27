@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "jobTitle": "Java TA",
+    "reason": "I have experience in Java and teamwork.",
+    "status": "Pending"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "jobTitle": "Database TA",
+    "reason": "I am good at SQL and data analysis.",
+    "status": "Pending"
+  }
+]
