@@ -181,19 +181,25 @@
         </div>
         
         <div class="info-grid">
-            <div class="info-card">
-                <h3>我的申请</h3>
-                <p>--</p>
-            </div>
-            <div class="info-card">
-                <h3>申请状态</h3>
-                <p>待审核</p>
-            </div>
-            <div class="info-card">
-                <h3>消息通知</h3>
-                <p>0</p>
-            </div>
-        </div>
+    <div class="info-card">
+        <h3>我的申请</h3>
+        <p>--</p>
+    </div>
+    <div class="info-card">
+        <h3>申请状态</h3>
+        <p>待审核</p>
+    </div>
+    <div class="info-card">
+        <h3>消息通知</h3>
+        <p>0</p>
+    </div>
+
+    <!-- 你添加的个人资料入口 -->
+    <div class="info-card" onclick="window.location.href='applicant/profile.jsp'" style="cursor:pointer;">
+        <h3>我的个人资料</h3>
+        <p>点击查看</p>
+    </div>
+</div>
     </div>
 </body>
 </html>
