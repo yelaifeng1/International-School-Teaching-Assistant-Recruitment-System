@@ -1,3 +1,5 @@
+package com.group50.tasystem;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,23 +12,26 @@ import org.json.JSONObject;
 
 @WebServlet("/reviewApplication")
 public class ReviewApplicationServlet extends HttpServlet {
-    // JSON文件的绝对路径，部署后请修改为你服务器上的真实路径
-    private static final String JSON_FILE_PATH = "/your/project/path/application-review/applications.json";
+    private String getDataPath(HttpServletRequest request) {
+        // 使用 target/classes/data 目录存储数据
+        return System.getProperty("user.dir") + "/target/classes/data/applications.json";
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String JSON_FILE_PATH = getDataPath(request);
         // 1. 接收并校验参数
         request.setCharacterEncoding("UTF-8");
         String idStr = request.getParameter("id");
         String newStatus = request.getParameter("status");
 
-        // 校验参数合法性
+        // Validate parameters
         if (idStr == null || newStatus == null) {
-            response.sendRedirect("reviewApplications.jsp?error=参数不能为空");
+            response.sendRedirect("/application-review/reviewApplications.jsp?error=Parameters cannot be empty");
             return;
         }
-        // 只允许3种合法状态，和需求完全匹配
+        // Only allow 3 valid statuses
         if (!newStatus.equals("Pending") && !newStatus.equals("Approved") && !newStatus.equals("Rejected")) {
-            response.sendRedirect("reviewApplications.jsp?error=非法的状态值");
+            response.sendRedirect("/application-review/reviewApplications.jsp?error=Invalid status value");
             return;
         }
 
@@ -34,12 +39,19 @@ public class ReviewApplicationServlet extends HttpServlet {
         try {
             targetId = Integer.parseInt(idStr);
         } catch (NumberFormatException e) {
-            response.sendRedirect("reviewApplications.jsp?error=非法的申请ID");
+            response.sendRedirect("/application-review/reviewApplications.jsp?error=Invalid application ID");
             return;
         }
 
         // 2. 读取JSON文件
         try {
+            // 确保文件存在
+            File file = new File(JSON_FILE_PATH);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                Files.write(Paths.get(JSON_FILE_PATH), "[]".getBytes(StandardCharsets.UTF_8));
+            }
+            
             String jsonContent = new String(Files.readAllBytes(Paths.get(JSON_FILE_PATH)), StandardCharsets.UTF_8);
             JSONArray applicationArray = new JSONArray(jsonContent);
 
@@ -55,23 +67,23 @@ public class ReviewApplicationServlet extends HttpServlet {
             }
 
             if (!isUpdated) {
-                response.sendRedirect("reviewApplications.jsp?error=未找到对应申请");
+                response.sendRedirect("/application-review/reviewApplications.jsp?error=Application not found");
                 return;
             }
 
-            // 4. 把修改后的内容写回JSON文件（核心回写逻辑）
+            // 4. Write updated content back to JSON file
             FileWriter fileWriter = new FileWriter(JSON_FILE_PATH, StandardCharsets.UTF_8);
-            fileWriter.write(applicationArray.toString(4)); // 4是格式化缩进，方便查看
+            fileWriter.write(applicationArray.toString(4)); // 4 is for formatted indentation
             fileWriter.flush();
             fileWriter.close();
 
-            // 5. 审核完成，跳转回申请列表页，业务闭环
-            response.sendRedirect("reviewApplications.jsp?success=审核成功");
+            // 5. Redirect back to application list
+            response.sendRedirect("/application-review/reviewApplications.jsp?success=Review completed successfully");
 
         } catch (Exception e) {
-            // 异常处理，避免服务器500错误
+            // Exception handling to avoid server 500 error
             e.printStackTrace();
-            response.sendRedirect("reviewApplications.jsp?error=系统错误，请重试");
+            response.sendRedirect("/application-review/reviewApplications.jsp?error=System error: " + e.getMessage());
         }
     }
 }
