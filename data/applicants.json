@@ -2,12 +2,12 @@
   {
     "applicantId": "AP001",
     "userId": "U001",
-    "fullName": "Test Applicant",
+    "fullName": "Alice Applicant",
     "studentId": "S1001",
     "email": "ta@example.com",
-    "phone": "0400000000",
-    "skills": "Java, communication",
-    "availability": "Mon, Wed",
-    "cvPath": ""
+    "phone": "+44 7000 000001",
+    "skills": "Java, tutoring, communication",
+    "availability": "Mon-Wed afternoons",
+    "cvPath": "CV ready on request"
   }
 ]
