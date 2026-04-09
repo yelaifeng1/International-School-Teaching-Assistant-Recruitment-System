@@ -10,6 +10,7 @@
           </option>
           <option name="goals">
             <list>
+              <option value="package" />
               <option value="cargo:start" />
             </list>
           </option>

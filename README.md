@@ -43,13 +43,13 @@ mvn clean package
 Run locally:
 
 ```bash
-mvn cargo:run
+mvn package cargo:run
 ```
 
 Start and stop in background:
 
 ```bash
-mvn cargo:start
+mvn package cargo:start
 mvn cargo:stop
 ```
 
@@ -58,6 +58,10 @@ App URL:
 ```text
 http://localhost:8080/ta-recruitment-system
 ```
+
+Note:
+
+- `cargo:run` and `cargo:start` deploy the existing WAR under `target/`, so run them with `package` first to avoid serving stale code.
 
 ## Demo Accounts
 

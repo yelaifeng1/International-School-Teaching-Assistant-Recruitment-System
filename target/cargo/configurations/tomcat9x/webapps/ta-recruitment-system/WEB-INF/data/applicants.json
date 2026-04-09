@@ -1,0 +1,13 @@
+[
+  {
+    "applicantId": "AP001",
+    "userId": "U001",
+    "fullName": "Alice Applicant",
+    "studentId": "S1001",
+    "email": "ta@example.com",
+    "phone": "+44 7000 000001",
+    "skills": "Java, tutoring, communication",
+    "availability": "Mon-Wed afternoons",
+    "cvPath": "CV ready on request"
+  }
+]
