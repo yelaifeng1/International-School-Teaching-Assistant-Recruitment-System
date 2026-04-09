@@ -1,11 +1,24 @@
 [
   {
     "jobId": "J001",
-    "courseCode": "COMP1001",
-    "courseName": "Introduction to Programming",
-    "lecturerName": "Dr Smith",
-    "requirements": "Java basics",
-    "deadline": "2026-04-01",
-    "status": "Open"
+    "courseCode": "COMP1010",
+    "courseName": "Programming Foundations",
+    "lecturerName": "Mason Organiser",
+    "requirements": "Support lab sessions, answer student questions, and mark formative exercises.",
+    "deadline": "2026-04-17",
+    "status": "OPEN",
+    "createdByUserId": "U002",
+    "createdAt": "2026-04-07"
+  },
+  {
+    "jobId": "J002",
+    "courseCode": "COMP2020",
+    "courseName": "Database Systems",
+    "lecturerName": "Mason Organiser",
+    "requirements": "Assist with SQL labs, prepare tutorial material, and support office hours.",
+    "deadline": "2026-04-21",
+    "status": "OPEN",
+    "createdByUserId": "U002",
+    "createdAt": "2026-04-07"
   }
 ]

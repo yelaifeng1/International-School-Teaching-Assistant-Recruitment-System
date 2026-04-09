@@ -2,36 +2,28 @@
   {
     "userId": "U001",
     "username": "ta",
-    "password": "123",
+    "password": "ta123456",
     "role": "TA",
-    "email": "ta@example.com"
+    "email": "ta@example.com",
+    "displayName": "Alice Applicant",
+    "createdAt": "2026-04-07"
   },
   {
     "userId": "U002",
     "username": "mo",
-    "password": "123",
+    "password": "mo123456",
     "role": "MO",
-    "email": "mo@example.com"
+    "email": "mo@example.com",
+    "displayName": "Mason Organiser",
+    "createdAt": "2026-04-07"
   },
   {
     "userId": "U003",
     "username": "admin",
-    "password": "123",
+    "password": "admin123456",
     "role": "ADMIN",
-    "email": "admin@example.com"
-  },
-  {
-    "userId": "U004",
-    "username": "石逸涵",
-    "password": "shiyihan6",
-    "role": "TA",
-    "email": "2456493855@qq.com"
-  },
-  {
-    "userId": "U005",
-    "username": "我的刀盾",
-    "password": "wodedaodun6",
-    "role": "TA",
-    "email": "jp2023213456@qmul.ac.uk"
+    "email": "admin@example.com",
+    "displayName": "Admin Team",
+    "createdAt": "2026-04-07"
   }
 ]
