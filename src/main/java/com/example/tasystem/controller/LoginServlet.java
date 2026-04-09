@@ -33,7 +33,9 @@ public class LoginServlet extends BaseServlet {
         Optional<User> user = services().getAuthService().authenticate(username, password);
         if (user.isEmpty()) {
             request.setAttribute("error", "Incorrect username or password.");
-            request.setAttribute("rememberedUsername", username);
+            // Clear both fields on login failure.
+            // (Password input is never repopulated; username is cleared by not pre-filling it.)
+            request.setAttribute("rememberedUsername", "");
             render("auth/login.jsp", request, response);
             return;
         }
