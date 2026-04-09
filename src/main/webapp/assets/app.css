@@ -254,12 +254,103 @@ a {
     display: grid;
     place-items: center;
     padding: clamp(16px, 4vw, 24px);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.auth-scene,
+.auth-photo-tile,
+.auth-pattern-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.auth-scene {
+    z-index: -2;
+    overflow: hidden;
+}
+
+.auth-photo-tile {
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    width: min(31vw, 460px);
+    aspect-ratio: 4 / 3;
+    border-radius: 26px;
+    opacity: 0.62;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform-origin: center;
+    transition: transform 1200ms cubic-bezier(0.22, 0.61, 0.36, 1), opacity 800ms ease;
+    filter: saturate(1.08) contrast(1.06);
+    box-shadow: 0 10px 22px rgba(10, 30, 50, 0.1);
+}
+
+.auth-photo-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(10, 29, 48, 0.03), rgba(10, 29, 48, 0));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.auth-photo-tile.slot-1 {
+    transform: translate3d(-146%, -112%, 0) rotate(-6deg) scale(1.01);
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.auth-photo-tile.slot-2 {
+    transform: translate3d(66%, -110%, 0) rotate(6deg) scale(1.03);
+    z-index: 3;
+    opacity: 0.64;
+}
+
+.auth-photo-tile.slot-3 {
+    transform: translate3d(74%, 52%, 0) rotate(-2deg) scale(1.02);
+    z-index: 2;
+    opacity: 0.62;
+}
+
+.auth-photo-tile.slot-4 {
+    transform: translate3d(-150%, 50%, 0) rotate(4deg) scale(1.02);
+    z-index: 2;
+    opacity: 0.6;
+}
+
+.auth-pattern-layer {
+    background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04)),
+        repeating-linear-gradient(
+            0deg,
+            rgba(13, 59, 102, 0.034),
+            rgba(13, 59, 102, 0.034) 1px,
+            transparent 1px,
+            transparent 36px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(13, 59, 102, 0.02),
+            rgba(13, 59, 102, 0.02) 1px,
+            transparent 1px,
+            transparent 36px
+        );
+    z-index: 5;
+    opacity: 0.16;
+    transform: translate3d(0, 0, 0);
+    animation: auth-pattern-drift-b 40s linear infinite;
 }
 
 .auth-card {
     width: min(480px, 100%);
     padding: clamp(18px, 4.5vw, 32px);
     border-radius: clamp(18px, 4.5vw, 30px);
+    position: relative;
+    z-index: 1;
 }
 
 .auth-card h1 {
@@ -353,6 +444,111 @@ input.btn {
 .btn-small {
     padding: 9px 14px;
     font-size: 0.92rem;
+}
+
+/* Auth pages (login/register): button hover & active interactions */
+.auth-wrap .btn,
+.auth-wrap button.btn,
+.auth-wrap input.btn {
+    position: relative;
+    overflow: hidden;
+    transition: transform 120ms ease, filter 120ms ease;
+    will-change: transform;
+}
+
+.auth-wrap .btn::after,
+.auth-wrap button.btn::after {
+    content: "";
+    position: absolute;
+    top: -140%;
+    left: -30%;
+    width: 30%;
+    height: 380%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-220%) skewX(-24deg);
+    background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0)
+    );
+}
+
+.auth-wrap .btn:hover,
+.auth-wrap button.btn:hover,
+.auth-wrap input.btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+}
+
+.auth-wrap .btn:hover::after,
+.auth-wrap button.btn:hover::after {
+    opacity: 1;
+    animation: auth-btn-shine 620ms ease-out 1;
+}
+
+.auth-wrap .btn:active,
+.auth-wrap button.btn:active,
+.auth-wrap input.btn:active {
+    transform: translateY(0) scale(0.98);
+    filter: brightness(0.97);
+}
+
+.auth-wrap .btn:disabled,
+.auth-wrap button.btn:disabled,
+.auth-wrap input.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
+    filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-wrap .btn,
+    .auth-wrap button.btn,
+    .auth-wrap input.btn {
+        transition: none;
+        will-change: auto;
+    }
+
+    .auth-wrap .btn::after,
+    .auth-wrap button.btn::after {
+        animation: none;
+        opacity: 0;
+    }
+
+    .auth-photo-tile,
+    .auth-pattern-layer {
+        transition: none;
+        animation: none;
+        transform: none;
+    }
+
+    .auth-photo-tile {
+        opacity: 0.4;
+    }
+}
+
+@keyframes auth-pattern-drift-b {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(-2.8%, 2.2%, 0);
+    }
+    100% {
+        transform: translate3d(2.8%, -2.2%, 0);
+    }
+}
+
+@keyframes auth-btn-shine {
+    from {
+        transform: translateX(-220%) skewX(-24deg);
+    }
+    to {
+        transform: translateX(420%) skewX(-24deg);
+    }
 }
 
 .info-banner {
@@ -522,6 +718,31 @@ th {
     .auth-wrap {
         place-items: start;
         padding-top: 18px;
+    }
+
+    .auth-pattern-layer {
+        opacity: 0.45;
+    }
+
+    .auth-photo-tile {
+        width: min(48vw, 220px);
+        border-radius: 18px;
+    }
+
+    .auth-photo-tile.slot-1 {
+        transform: translate3d(-118%, -96%, 0) rotate(-6deg) scale(1.01);
+    }
+
+    .auth-photo-tile.slot-2 {
+        transform: translate3d(64%, -94%, 0) rotate(4deg) scale(1.03);
+    }
+
+    .auth-photo-tile.slot-3 {
+        transform: translate3d(66%, 56%, 0) rotate(-2deg) scale(1.02);
+    }
+
+    .auth-photo-tile.slot-4 {
+        transform: translate3d(-122%, 52%, 0) rotate(3deg) scale(1.01);
     }
 
     .auth-card {
