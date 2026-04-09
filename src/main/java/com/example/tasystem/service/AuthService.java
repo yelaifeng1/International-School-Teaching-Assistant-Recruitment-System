@@ -33,9 +33,8 @@ public class AuthService {
         return userDAO.findAll();
     }
 
-    public ServiceResult<User> register(String username, String password, String role, String email) {
+    public ServiceResult<User> register(String username, String password, String role) {
         String trimmedUsername = username == null ? "" : username.trim();
-        String trimmedEmail = email == null ? "" : email.trim();
         String normalizedRole = Roles.normalize(role);
 
         if (trimmedUsername.length() < 3 || trimmedUsername.length() > 20) {
@@ -58,16 +57,11 @@ public class AuthService {
             return ServiceResult.failure("Password must contain both letters and numbers.");
         }
 
-        if (trimmedEmail.isBlank() || !trimmedEmail.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
-            return ServiceResult.failure("Please provide a valid email address.");
-        }
-
         User user = new User();
         user.setUserId(userDAO.nextUserId());
         user.setUsername(trimmedUsername);
         user.setPassword(password);
         user.setRole(normalizedRole);
-        user.setEmail(trimmedEmail);
         user.setDisplayName(trimmedUsername);
         user.setCreatedAt(LocalDate.now().toString());
         userDAO.save(user);

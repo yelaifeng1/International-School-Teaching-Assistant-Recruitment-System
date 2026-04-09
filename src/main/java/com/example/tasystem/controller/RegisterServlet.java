@@ -21,15 +21,13 @@ public class RegisterServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = value(request, "username");
-        String email = value(request, "email");
         String role = value(request, "role");
         String password = request.getParameter("password");
 
-        ServiceResult<User> result = services().getAuthService().register(username, password, role, email);
+        ServiceResult<User> result = services().getAuthService().register(username, password, role);
         if (!result.isSuccess()) {
             request.setAttribute("error", result.getMessage());
             request.setAttribute("username", username);
-            request.setAttribute("email", email);
             request.setAttribute("role", role);
             render("auth/register.jsp", request, response);
             return;
