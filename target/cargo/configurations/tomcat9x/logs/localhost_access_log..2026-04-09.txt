@@ -41,3 +41,11 @@
 0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:48:10 +0800] "GET /ta-recruitment-system/assets/auth-bg/R-C.png?v=20260409f HTTP/1.1" 200 41460
 0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:48:10 +0800] "GET /ta-recruitment-system/assets/auth-bg/6365602546733818246807666.jpg?v=20260409f HTTP/1.1" 200 278110
 0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:48:12 +0800] "GET /ta-recruitment-system/login HTTP/1.1" 200 3747
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:12 +0800] "GET /ta-recruitment-system/login HTTP/1.1" 200 3819
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:12 +0800] "GET /ta-recruitment-system/assets/app.css?v=20260409g HTTP/1.1" 200 15359
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:12 +0800] "GET /ta-recruitment-system/assets/auth-bg/6365602546733818246807666.jpg?v=20260409g HTTP/1.1" 200 278110
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:12 +0800] "GET /ta-recruitment-system/assets/auth-bg/R-C.png?v=20260409g HTTP/1.1" 200 41460
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:12 +0800] "GET /ta-recruitment-system/assets/auth-bg/20231107153100698.png?v=20260409g HTTP/1.1" 200 652991
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:12 +0800] "GET /ta-recruitment-system/assets/auth-bg/v2-b61d5abf08d0bddf55b4210b321966c6_r.jpg?v=20260409g HTTP/1.1" 200 75524
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:20 +0800] "GET /ta-recruitment-system/register HTTP/1.1" 200 3884
+0:0:0:0:0:0:0:1 - - [09/Apr/2026:17:51:20 +0800] "GET /ta-recruitment-system/assets/app.css?v=20260409g HTTP/1.1" 304 -
