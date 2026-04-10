@@ -26,6 +26,8 @@ public class ReviewApplicationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Path jsonFilePath = getDataPath(request);
+        String contextPath = request.getContextPath();
+        
         // 1. 接收并校验参数
         request.setCharacterEncoding("UTF-8");
         String idStr = request.getParameter("id");
@@ -33,12 +35,12 @@ public class ReviewApplicationServlet extends HttpServlet {
 
         // Validate parameters
         if (idStr == null || newStatus == null) {
-            response.sendRedirect("/mo/review-applications?error=Parameters cannot be empty");
+            response.sendRedirect(contextPath + "/mo/review-applications?error=Parameters cannot be empty");
             return;
         }
         // Only allow 3 valid statuses
         if (!newStatus.equals("Pending") && !newStatus.equals("Approved") && !newStatus.equals("Rejected")) {
-            response.sendRedirect("/mo/review-applications?error=Invalid status value");
+            response.sendRedirect(contextPath + "/mo/review-applications?error=Invalid status value");
             return;
         }
 
@@ -46,7 +48,7 @@ public class ReviewApplicationServlet extends HttpServlet {
         try {
             targetId = Integer.parseInt(idStr);
         } catch (NumberFormatException e) {
-            response.sendRedirect("/mo/review-applications?error=Invalid application ID");
+            response.sendRedirect(contextPath + "/mo/review-applications?error=Invalid application ID");
             return;
         }
 
@@ -73,7 +75,7 @@ public class ReviewApplicationServlet extends HttpServlet {
             }
 
             if (!isUpdated) {
-                response.sendRedirect("/mo/review-applications?error=Application not found");
+                response.sendRedirect(contextPath + "/mo/review-applications?error=Application not found");
                 return;
             }
 
@@ -84,12 +86,12 @@ public class ReviewApplicationServlet extends HttpServlet {
             fileWriter.close();
 
             // 5. Redirect back to application list
-            response.sendRedirect("/mo/review-applications?success=Review completed successfully");
+            response.sendRedirect(contextPath + "/mo/review-applications?success=Review completed successfully");
 
         } catch (Exception e) {
             // Exception handling to avoid server 500 error
             e.printStackTrace();
-            response.sendRedirect("/mo/review-applications?error=System error: " + e.getMessage());
+            response.sendRedirect(contextPath + "/mo/review-applications?error=System error: " + e.getMessage());
         }
     }
 }
