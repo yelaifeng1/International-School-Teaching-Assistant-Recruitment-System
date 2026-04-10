@@ -20,7 +20,7 @@
         </div>
         <div class="topbar-actions">
             <a class="btn btn-ghost" href="${pageContext.request.contextPath}/mo/jobs">Manage Jobs</a>
-            <a class="btn btn-ghost" href="${pageContext.request.contextPath}/mo/review-applications">Review Applications</a>
+<a class="btn btn-ghost" href="${pageContext.request.contextPath}/mo/applications">Review Applications</a>
             <form method="post" action="${pageContext.request.contextPath}/logout">
                 <button class="btn btn-primary" type="submit">Log Out</button>
             </form>
@@ -59,7 +59,7 @@
             <h2>Quick Actions</h2>
             <div class="stack-inline">
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/mo/jobs/new">Post Job</a>
-                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/mo/review-applications">📋 Review Applications</a>
+<a class="btn btn-secondary" href="${pageContext.request.contextPath}/mo/applications">📋 Review Applications</a>
             </div>
             <p class="muted" style="margin-top: 14px;">Approving an application creates an assignment and fills the job automatically.</p>
         </div>
