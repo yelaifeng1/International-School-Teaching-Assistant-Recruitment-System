@@ -62,6 +62,7 @@
                 <th>Role</th>
                 <th>Email</th>
                 <th>Created At</th>
+                <th>Workload</th>
             </tr>
             </thead>
             <tbody>
@@ -79,6 +80,16 @@
                     </td>
                     <td><c:out value="${user.email}"/></td>
                     <td><c:out value="${user.createdAt}"/></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${user.role == 'TA'}">
+                                <a class="btn btn-ghost" href="${pageContext.request.contextPath}/admin/workload?taUserId=${user.userId}">View Workload</a>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="muted">-</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

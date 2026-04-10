@@ -5,6 +5,7 @@ com\example\tasystem\ReviewApplicationServlet.class
 com\example\tasystem\service\AuthService.class
 com\example\tasystem\util\SessionUtil.class
 com\example\tasystem\util\FlashUtil.class
+com\example\tasystem\controller\AdminWorkloadServlet.class
 com\example\tasystem\controller\ManagerJobStatusServlet.class
 com\example\tasystem\controller\LogoutServlet.class
 com\example\tasystem\controller\BaseServlet.class
