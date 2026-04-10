@@ -18,5 +18,15 @@
     "reason": "I am good at SQL and data analysis.",
     "status": "Pending",
     "applyDate": "2026-04-02"
+  },
+  {
+    "id": 3,
+    "jobId": 1,
+    "applicantId": 3,
+    "name": "Test User",
+    "jobTitle": "EBU6304 Software Engineering - Java TA",
+    "reason": "新提交的测试申请 - Testing MO review page functionality",
+    "status": "Pending",
+    "applyDate": "2026-04-10"
   }
 ]
