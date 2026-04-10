@@ -25,5 +25,13 @@
     "email": "admin@example.com",
     "displayName": "Admin Team",
     "createdAt": "2026-04-07"
+  },
+  {
+    "userId": "U004",
+    "username": "test04",
+    "password": "test041234",
+    "role": "MO",
+    "displayName": "test04",
+    "createdAt": "2026-04-10"
   }
 ]

@@ -1,5 +1,6 @@
 package com.example.tasystem;
 
+import com.example.tasystem.util.StorageResolver;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,17 +14,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @WebServlet("/reviewApplication")
 public class ReviewApplicationServlet extends HttpServlet {
-    private String getDataPath(HttpServletRequest request) {
-        // 使用 target/classes/data 目录存储数据
-        return System.getProperty("user.dir") + "/target/classes/data/applications.json";
+    private Path getDataPath(HttpServletRequest request) {
+        // 使用 StorageResolver 获取数据目录
+        return StorageResolver.dataDirectory(getServletContext()).resolve("applications.json");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String JSON_FILE_PATH = getDataPath(request);
+        Path jsonFilePath = getDataPath(request);
         // 1. 接收并校验参数
         request.setCharacterEncoding("UTF-8");
         String idStr = request.getParameter("id");
@@ -31,12 +33,12 @@ public class ReviewApplicationServlet extends HttpServlet {
 
         // Validate parameters
         if (idStr == null || newStatus == null) {
-            response.sendRedirect("/application-review/reviewApplications.jsp?error=Parameters cannot be empty");
+            response.sendRedirect("/mo/review-applications?error=Parameters cannot be empty");
             return;
         }
         // Only allow 3 valid statuses
         if (!newStatus.equals("Pending") && !newStatus.equals("Approved") && !newStatus.equals("Rejected")) {
-            response.sendRedirect("/application-review/reviewApplications.jsp?error=Invalid status value");
+            response.sendRedirect("/mo/review-applications?error=Invalid status value");
             return;
         }
 
@@ -44,20 +46,19 @@ public class ReviewApplicationServlet extends HttpServlet {
         try {
             targetId = Integer.parseInt(idStr);
         } catch (NumberFormatException e) {
-            response.sendRedirect("/application-review/reviewApplications.jsp?error=Invalid application ID");
+            response.sendRedirect("/mo/review-applications?error=Invalid application ID");
             return;
         }
 
         // 2. 读取JSON文件
         try {
             // 确保文件存在
-            File file = new File(JSON_FILE_PATH);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                Files.write(Paths.get(JSON_FILE_PATH), "[]".getBytes(StandardCharsets.UTF_8));
+            if (!Files.exists(jsonFilePath)) {
+                Files.createDirectories(jsonFilePath.getParent());
+                Files.write(jsonFilePath, "[]".getBytes(StandardCharsets.UTF_8));
             }
             
-            String jsonContent = new String(Files.readAllBytes(Paths.get(JSON_FILE_PATH)), StandardCharsets.UTF_8);
+            String jsonContent = new String(Files.readAllBytes(jsonFilePath), StandardCharsets.UTF_8);
             JSONArray applicationArray = new JSONArray(jsonContent);
 
             // 3. 找到对应ID的申请，修改状态
@@ -72,23 +73,23 @@ public class ReviewApplicationServlet extends HttpServlet {
             }
 
             if (!isUpdated) {
-                response.sendRedirect("/application-review/reviewApplications.jsp?error=Application not found");
+                response.sendRedirect("/mo/review-applications?error=Application not found");
                 return;
             }
 
             // 4. Write updated content back to JSON file
-            FileWriter fileWriter = new FileWriter(JSON_FILE_PATH, StandardCharsets.UTF_8);
+            FileWriter fileWriter = new FileWriter(jsonFilePath.toFile(), StandardCharsets.UTF_8);
             fileWriter.write(applicationArray.toString(4)); // 4 is for formatted indentation
             fileWriter.flush();
             fileWriter.close();
 
             // 5. Redirect back to application list
-            response.sendRedirect("/application-review/reviewApplications.jsp?success=Review completed successfully");
+            response.sendRedirect("/mo/review-applications?success=Review completed successfully");
 
         } catch (Exception e) {
             // Exception handling to avoid server 500 error
             e.printStackTrace();
-            response.sendRedirect("/application-review/reviewApplications.jsp?error=System error: " + e.getMessage());
+            response.sendRedirect("/mo/review-applications?error=System error: " + e.getMessage());
         }
     }
 }
