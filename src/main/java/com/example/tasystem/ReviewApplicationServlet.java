@@ -1,14 +1,19 @@
 package com.example.tasystem;
 
-import java.io.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.WebServlet;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 @WebServlet("/reviewApplication")
 public class ReviewApplicationServlet extends HttpServlet {
