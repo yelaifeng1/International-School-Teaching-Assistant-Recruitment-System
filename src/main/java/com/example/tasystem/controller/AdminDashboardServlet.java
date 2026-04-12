@@ -15,6 +15,7 @@ public class AdminDashboardServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = services().getAuthService().findAllUsers();
+
         request.setAttribute("users", users);
         request.setAttribute("jobs", services().getJobService().listAllJobs());
         request.setAttribute("applications", services().getApplicationService().listAllApplications());
