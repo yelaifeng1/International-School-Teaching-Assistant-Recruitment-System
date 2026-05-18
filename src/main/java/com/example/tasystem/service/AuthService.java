@@ -33,8 +33,9 @@ public class AuthService {
         return userDAO.findAll();
     }
 
-    public ServiceResult<User> register(String username, String password, String role) {
+    public ServiceResult<User> register(String username, String email, String password, String role) {
         String trimmedUsername = username == null ? "" : username.trim();
+        String normalizedEmail = email == null ? "" : email.trim();
         String normalizedRole = Roles.normalize(role);
 
         if (trimmedUsername.length() < 3 || trimmedUsername.length() > 20) {
@@ -47,6 +48,14 @@ public class AuthService {
 
         if (userDAO.usernameExists(trimmedUsername)) {
             return ServiceResult.failure("Username already exists.");
+        }
+
+        if (normalizedEmail.isBlank() || !normalizedEmail.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+            return ServiceResult.failure("Please provide a valid email address.");
+        }
+
+        if (userDAO.emailExists(normalizedEmail)) {
+            return ServiceResult.failure("Email already exists.");
         }
 
         if (password == null || password.length() < 8) {
@@ -62,6 +71,7 @@ public class AuthService {
         user.setUsername(trimmedUsername);
         user.setPassword(password);
         user.setRole(normalizedRole);
+        user.setEmail(normalizedEmail);
         user.setDisplayName(trimmedUsername);
         user.setCreatedAt(LocalDate.now().toString());
         userDAO.save(user);
