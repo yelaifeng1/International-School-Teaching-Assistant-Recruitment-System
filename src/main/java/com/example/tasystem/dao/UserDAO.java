@@ -33,8 +33,18 @@ public class UserDAO extends JsonFileDao<User> {
                 .findFirst();
     }
 
+    public Optional<User> findByEmail(String email) {
+        return findAll().stream()
+                .filter(user -> user.getEmail() != null && user.getEmail().equalsIgnoreCase(email))
+                .findFirst();
+    }
+
     public boolean usernameExists(String username) {
         return findByUsername(username).isPresent();
+    }
+
+    public boolean emailExists(String email) {
+        return findByEmail(email).isPresent();
     }
 
     public User save(User user) {
